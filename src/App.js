@@ -1,25 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Sprite, Stage, Text, AppContext } from "react-pixi-fiber";
+import Character from "./components/Character";
+
+const height = window.innerHeight;
+const width = window.innerWidth;
+const OPTIONS = {
+  backgroundColor: 0x000000,
+  resolution: window.devicePixelRatio || 1,
+  // autoStart:false,
+  height: height,
+  width: width
+};
 
 function App() {
+    const [pending, setPenging] = React.useState(true);
+
+    React.useEffect(()=> {
+        setTimeout(()=> setPenging(false)
+            ,3000)
+    },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Stage options={OPTIONS}>
+
+          {pending ? (
+              <AppContext.Consumer>
+              {app =>  (
+                  <Character x={width / 2} y={height / 2} app={app}/>
+              )}
+          </AppContext.Consumer>
+          ) : (
+              <Text text="Hello World!" x={200} y={200}/>
+          )
+          }
+      </Stage>
   );
 }
 
