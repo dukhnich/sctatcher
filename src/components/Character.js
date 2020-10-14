@@ -6,36 +6,33 @@ window.PIXI = PIXI;
 require("pixi-spine")
 
 function Character(props) {
-    const [spine, setSpine] = React.useState(null)
 
     const {app} = props;
     function onAssetsLoaded(loader, res) {
         const spineCharacter = new window.PIXI.spine.Spine(res.spineCharacter.spineData);
-console.log(spineCharacter)
         // set the position
         spineCharacter.x = app.screen.width / 2;
         spineCharacter.y = app.screen.height / 2;
-        setSpine(()=>spineCharacter)
 
         spineCharacter.scale.set(0.25);
 
         app.stage.addChild(spineCharacter);
 
         spineCharacter.state.setAnimation(0, 'red_loading_screen_animation_loop', true);
-        // return spineCharacter
-        // app.start();
+        // console.log(spineCharacter.state)
+        app.start();
     }
 
     React.useEffect(()=>{
+        // console.log(app.stage.getChildAt(0))
         app.loader
             .add('spineCharacter', '/assets/char_spine_v5/Red.json')
             .load(onAssetsLoaded);
         app.stage.interactive = true;
 
         return ()=> {
-            console.log(spine)
-            app.loader.reset()
-            // app.stage.removeChild(spine);
+            console.log(app.stage.getChildAt(0))
+            app.stage.removeChild(app.stage.getChildAt(0));
             // app.loader.destroy();
         }
 

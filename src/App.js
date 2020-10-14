@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sprite, Stage, Text, AppContext } from "react-pixi-fiber";
 import Character from "./components/Character";
+import Game from "./components/Game";
 
 const height = window.innerHeight;
 const width = window.innerWidth;
@@ -12,25 +13,32 @@ const OPTIONS = {
   width: width
 };
 
+const viewHeight = (height / (window.devicePixelRatio || 1));
+
 function App() {
-    const [pending, setPenging] = React.useState(true);
+    const [pending, setPending] = React.useState(true);
 
     React.useEffect(()=> {
-        setTimeout(()=> setPenging(false)
+
+        console.log("effect")
+        setTimeout(()=> {
+                console.log("setTimeout")
+            setPending(false)
+            }
             ,3000)
     },[])
 
   return (
       <Stage options={OPTIONS}>
 
-          {pending ? (
+          { (
               <AppContext.Consumer>
-              {app =>  (
-                  <Character x={width / 2} y={height / 2} app={app}/>
+              {app => pending ? (
+                 console.log(1), <Character x={width / 2} y={height / 2} app={app}/>
+              ): (
+                  <Game  x={width / 2} y={height / 2}  app={app} height={height} viewHeight={viewHeight}/>
               )}
           </AppContext.Consumer>
-          ) : (
-              <Text text="Hello World!" x={200} y={200}/>
           )
           }
       </Stage>
