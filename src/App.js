@@ -2,6 +2,9 @@ import React from 'react';
 import { Sprite, Stage, Text, AppContext } from "react-pixi-fiber";
 import SpineCharacter from "./components/SpineCharacter";
 import Game from "./components/Game";
+import {connect, Provider} from "react-redux";
+import store from "./store/configure-store";
+
 
 const height = window.innerHeight;
 const width = window.innerWidth;
@@ -19,18 +22,16 @@ function App() {
     const [pending, setPending] = React.useState(true);
 
     React.useEffect(()=> {
-
-        console.log("effect")
         setTimeout(()=> {
-                console.log("setTimeout")
             setPending(false)
             }
             ,3000)
     },[])
 
   return (
-      <Stage options={OPTIONS}>
 
+      <Stage options={OPTIONS}>
+          <Provider store={store}>
           { (
               <AppContext.Consumer>
               {app => pending ? (
@@ -41,8 +42,9 @@ function App() {
           </AppContext.Consumer>
           )
           }
+          </Provider>
       </Stage>
   );
 }
 
-export default App;
+export default App

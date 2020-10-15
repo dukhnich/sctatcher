@@ -13,7 +13,6 @@ const style = new PIXI.TextStyle({
 });
 const button = "/assets/magic_forest_button.png";
 const texture = PIXI.Texture.from(button)
-const centerAnchor = new PIXI.Point(0.5, 0.5);
 
 function BannerButton(props) {
     const [width, setX] = React.useState(0);
@@ -26,6 +25,10 @@ function BannerButton(props) {
 
     return (
             <Sprite
+                buttonMode
+                interactive
+                // pointerup={() => dispatch({ type: "INCREMENT" })}
+                pointerup={() => console.log("click")}
                 ref = {ref}
                 x={(props.container.baseTexture.width - width)/2}
                 y={props.container.baseTexture.height/2}
