@@ -1,29 +1,11 @@
 
 
-export const loadUser = (id) => async (dispatch, _, api) => {
+export const startGame = () => async (dispatch) => {
     try {
-        dispatch({ type: "loadUser/pending" });
-        const values = {
-                    query: JSON.stringify([
-                        {
-                            _id: id
-                        }
-                    ])
-                }
-        const  data  = await api.request(values);
+        dispatch({ type: "currentGame/start", payload: {} });
 
-        if (data === null) {
-            dispatch({ type: "loadUser/rejected" });
-        }
-
-        const {
-            UserFindOne: user
-        } = data;
-        // console.log(user)
-
-        dispatch({ type: "loadUser/resolved", payload: user })
     } catch (error) {
         console.log(error)
-        dispatch({ type: "loadUser/rejected" });
+        // dispatch({ type: "loadUser/rejected" });
     }
 };

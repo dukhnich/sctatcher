@@ -20,7 +20,7 @@ function ButtonText(props) {
 
 
     React.useEffect(()=> {
-        console.log(text.current.width)
+        // console.log(text.current.width)
             setX(wrapper.current.width);
             setY(wrapper.current.height)
 

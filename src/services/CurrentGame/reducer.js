@@ -11,16 +11,16 @@ const currentGameReducer = (state = initialState, action) => {
                 ...state,
                 status: "pending"
             };
-        case "currentGame/resolved":
+        case "currentGame/start":
             return {
                 ...state,
                 currentUser: action.payload,
                 status: "resolved"
             };
-        case "currentGame/rejected":
+        case "currentGame/finish":
             return {
                 ...state,
-                status: "rejected",
+                status: "finish",
             };
         default:
             return state;
