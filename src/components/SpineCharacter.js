@@ -5,7 +5,7 @@ import * as PIXI from "pixi.js";
 window.PIXI = PIXI;
 require("pixi-spine")
 
-function Character(props) {
+function SpineCharacter(props) {
 
     const {app} = props;
     function onAssetsLoaded(loader, res) {
@@ -41,8 +41,8 @@ function Character(props) {
     );
 }
 
-Character.propTypes = {
+SpineCharacter.propTypes = {
     app: PropTypes.object.isRequired,
 };
 
-export default Character;
+export default SpineCharacter;

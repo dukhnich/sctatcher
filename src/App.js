@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sprite, Stage, Text, AppContext } from "react-pixi-fiber";
-import Character from "./components/Character";
+import SpineCharacter from "./components/SpineCharacter";
 import Game from "./components/Game";
 
 const height = window.innerHeight;
@@ -13,7 +13,7 @@ const OPTIONS = {
   width: width
 };
 
-const viewHeight = (height / (window.devicePixelRatio || 1));
+const viewHeight = (height / (window.devicePixelRatio || 1))/1920;
 
 function App() {
     const [pending, setPending] = React.useState(true);
@@ -34,9 +34,9 @@ function App() {
           { (
               <AppContext.Consumer>
               {app => pending ? (
-                 console.log(1), <Character x={width / 2} y={height / 2} app={app}/>
+                 <SpineCharacter x={width / 2} y={height / 2} app={app}/>
               ): (
-                  <Game  x={width / 2} y={height / 2}  app={app} height={height} viewHeight={viewHeight}/>
+                  <Game  x={width / 2} y={height / 2}  app={app} height={height} scale={viewHeight}/>
               )}
           </AppContext.Consumer>
           )
