@@ -1,11 +1,17 @@
 const initialState = {
     currentGame: {},
     status: "idle",
+    scale: 1
 };
 
 const currentGameReducer = (state = initialState, action) => {
     // console.log(action)
     switch (action.type) {
+        case "currentGame/setScale":
+            return {
+                ...state,
+                scale: action.payload
+            };
         case "currentGame/pending":
             return {
                 ...state,
@@ -15,7 +21,7 @@ const currentGameReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: action.payload,
-                status: "resolved"
+                status: "play"
             };
         case "currentGame/finish":
             return {

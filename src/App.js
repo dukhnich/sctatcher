@@ -37,7 +37,7 @@ function App() {
               {app => pending ? (
                  <SpineCharacter x={width / 2} y={height / 2} app={app}/>
               ): (
-                  <Game  x={width / 2} y={height / 2}  app={app} height={height} scale={viewHeight}/>
+                  <Game  x={width / 2} y={height / 2}  app={app}/>
               )}
           </AppContext.Consumer>
           )
