@@ -1,7 +1,9 @@
 const initialState = {
     currentGame: {},
     status: "idle",
-    scale: 1
+    scale: 1,
+    width: 0,
+    height: 0
 };
 
 const currentGameReducer = (state = initialState, action) => {
@@ -11,6 +13,16 @@ const currentGameReducer = (state = initialState, action) => {
             return {
                 ...state,
                 scale: action.payload
+            };
+        case "currentGame/setWidth":
+            return {
+                ...state,
+                width: action.payload
+            };
+        case "currentGame/setHeight":
+            return {
+                ...state,
+                height: action.payload
             };
         case "currentGame/pending":
             return {
