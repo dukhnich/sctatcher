@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as PIXI from "pixi.js";
-import {Container, CustomPIXIComponent} from "react-pixi-fiber";
+import {Container, Sprite, CustomPIXIComponent} from "react-pixi-fiber";
 import Background from "./PlayingBoard/Background";
 import { connect } from "react-redux";
 import BoardHeader from "./PlayingBoard/BoardHeader";
 import StartBanner from "./StartBanner/StartBanner";
+import Bonus from "./PlayingBoard/Bonus";
 
 
 function Game({status, scale, width, height, dispatch, ...props}) {
@@ -42,13 +43,10 @@ function Game({status, scale, width, height, dispatch, ...props}) {
             width*scale*0.78,
             height
         )}>
-            <Container
-                alpha = {"idle" === status ? 0.6 : 1}
-            >
-                <Background {...props}>
-                    <BoardHeader/>
-                </Background>
-            </Container>
+            <Background {...props}>
+                <Bonus/>
+                <BoardHeader/>
+            </Background>
             {("idle" === status || "finish" === status )?
                 <StartBanner {...props}/>
                 : null
