@@ -1,26 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as PIXI from "pixi.js";
+import {connect} from "react-redux";
 
 window.PIXI = PIXI;
 require("pixi-spine")
 
-function Character(props) {
+function Character({app, width, height, status, scale,  ...props}) {
 
-    const {app} = props;
     function onAssetsLoaded(loader, res) {
         const character = new window.PIXI.spine.Spine(res.character.spineData);
         // set the position
-        character.x = app.screen.width / 2;
-        character.y = app.screen.height / 2;
+        character.x = width*0.26;
+        character.y = height*0.155;
 
-        character.scale.set(0.25);
+        character.scale.set(scale);
 
         app.stage.addChild(character);
 
-        character.state.setAnimation(0, 'red_loading_screen_animation_loop', true);
+        character.state.setAnimation(0, 'red_idle_loop', true);
         // console.log(spineCharacter.state)
-        app.start();
+        // app.start();
     }
 
     React.useEffect(()=>{
@@ -28,12 +28,9 @@ function Character(props) {
         app.loader
             .add('character', '/assets/char_spine_v5/Red.json')
             .load(onAssetsLoaded);
-        app.stage.interactive = true;
 
         return ()=> {
-            console.log(app.stage.getChildAt(0))
             app.stage.removeChild(app.stage.getChildAt(0));
-            // app.loader.destroy();
         }
 
     },[])
@@ -45,4 +42,13 @@ Character.propTypes = {
     app: PropTypes.object.isRequired,
 };
 
-export default Character;
+const mapStateToProps = (state /*, ownProps*/) => {
+    return {
+        width: state.currentGame.width,
+        height: state.currentGame.height,
+        status: state.currentGame.status,
+        scale: state.currentGame.scale,
+
+    };
+};
+export default connect(mapStateToProps)(Character);

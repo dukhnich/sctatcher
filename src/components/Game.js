@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import BoardHeader from "./PlayingBoard/BoardHeader";
 import StartBanner from "./StartBanner/StartBanner";
 import Bonus from "./PlayingBoard/Bonus";
+import Character from "./PlayingBoard/Character";
 
 
 function Game({status, scale, width, height, dispatch, ...props}) {
@@ -45,6 +46,7 @@ function Game({status, scale, width, height, dispatch, ...props}) {
         )}>
             <Background {...props}>
                 <Bonus/>
+                <Character {...props}/>
                 <BoardHeader/>
             </Background>
             {("idle" === status || "finish" === status )?

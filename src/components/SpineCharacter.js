@@ -28,12 +28,9 @@ function SpineCharacter(props) {
         app.loader
             .add('spineCharacter', '/assets/char_spine_v5/Red.json')
             .load(onAssetsLoaded);
-        app.stage.interactive = true;
 
         return ()=> {
-            console.log(app.stage.getChildAt(0))
             app.stage.removeChild(app.stage.getChildAt(0));
-            // app.loader.destroy();
         }
 
     },[])
