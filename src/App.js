@@ -1,8 +1,8 @@
 import React from 'react';
-import { Sprite, Stage, Text, AppContext } from "react-pixi-fiber";
+import { Stage, AppContext } from "react-pixi-fiber";
 import SpineCharacter from "./components/SpineCharacter";
 import Game from "./components/Game";
-import {connect, Provider} from "react-redux";
+import {Provider} from "react-redux";
 import store from "./store/configure-store";
 
 
@@ -15,8 +15,6 @@ const OPTIONS = {
   height: height,
   width: width
 };
-
-const viewHeight = (height / (window.devicePixelRatio || 1))/1920;
 
 function App() {
     const [pending, setPending] = React.useState(true);

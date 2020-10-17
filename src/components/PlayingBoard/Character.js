@@ -44,10 +44,10 @@ Character.propTypes = {
 
 const mapStateToProps = (state /*, ownProps*/) => {
     return {
-        width: state.currentGame.width,
-        height: state.currentGame.height,
+        width: state.sizes.widthBg,
+        height: state.sizes.heightBg,
         status: state.currentGame.status,
-        scale: state.currentGame.scale,
+        scale: state.sizes.scale,
 
     };
 };

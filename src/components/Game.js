@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as PIXI from "pixi.js";
-import {Container, Sprite, CustomPIXIComponent} from "react-pixi-fiber";
+import {CustomPIXIComponent} from "react-pixi-fiber";
 import Background from "./PlayingBoard/Background";
 import { connect } from "react-redux";
 import BoardHeader from "./PlayingBoard/BoardHeader";
@@ -11,7 +11,6 @@ import Character from "./PlayingBoard/Character";
 
 
 function Game({status, scale, width, height, dispatch, ...props}) {
-    dispatch({ type: "currentGame/setScale", payload: (window.innerHeight / (window.devicePixelRatio || 1))/1920 })
 
     const drawRectangle = (x, y, width, height) => {
         const g = new PIXI.Graphics();
@@ -66,9 +65,9 @@ Game.propTypes = {
 const mapStateToProps = (state /*, ownProps*/) => {
     return {
         status: state.currentGame.status,
-        scale: state.currentGame.scale,
-        width: state.currentGame.width,
-        height: state.currentGame.height,
+        scale: state.sizes.scale,
+        width: state.sizes.widthBg,
+        height: state.sizes.heightBg,
     };
 };
 export default connect(mapStateToProps)(Game);

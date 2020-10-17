@@ -1,20 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as PIXI from "pixi.js";
+import {connect} from "react-redux";
 
 window.PIXI = PIXI;
 require("pixi-spine")
 
-function SpineCharacter(props) {
+function SpineCharacter({scale, app}) {
 
-    const {app} = props;
     function onAssetsLoaded(loader, res) {
         const spineCharacter = new window.PIXI.spine.Spine(res.spineCharacter.spineData);
         // set the position
         spineCharacter.x = app.screen.width / 2;
         spineCharacter.y = app.screen.height / 2;
 
-        spineCharacter.scale.set(0.25);
+        spineCharacter.scale.set(scale);
 
         app.stage.addChild(spineCharacter);
 
@@ -42,4 +42,9 @@ SpineCharacter.propTypes = {
     app: PropTypes.object.isRequired,
 };
 
-export default SpineCharacter;
+const mapStateToProps = (state /*, ownProps*/) => {
+    return {
+        scale: state.sizes.scale,
+    };
+};
+export default connect(mapStateToProps)(SpineCharacter);

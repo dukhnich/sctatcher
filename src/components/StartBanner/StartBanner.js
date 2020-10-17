@@ -26,7 +26,7 @@ console.log(texture)
 
 const mapStateToProps = (state /*, ownProps*/) => {
     return {
-        scale: state.currentGame.scale,
+        scale: state.sizes.scale,
 
     };
 };
