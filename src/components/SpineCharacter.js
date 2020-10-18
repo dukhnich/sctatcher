@@ -11,6 +11,7 @@ function SpineCharacter({scale, app}) {
     function onAssetsLoaded(loader, res) {
         const spineCharacter = new window.PIXI.spine.Spine(res.spineCharacter.spineData);
         // set the position
+        spineCharacter.name = 'spineCharacter';
         spineCharacter.x = app.screen.width / 2;
         spineCharacter.y = app.screen.height / 2;
 
@@ -30,7 +31,7 @@ function SpineCharacter({scale, app}) {
             .load(onAssetsLoaded);
 
         return ()=> {
-            app.stage.removeChild(app.stage.getChildAt(0));
+            app.stage.getChildByName('spineCharacter').state.setEmptyAnimation(0);
         }
 
     },[])

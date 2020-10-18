@@ -1,11 +1,34 @@
+import {SUITS} from "../../consts";
+
 const initialState = {
     currentGame: {},
+    statusCharacter: "idle",
     status: "idle",
+    suit: SUITS[0],
+    open: {
+        bonus: [false],
+        // set: [false]
+    },
+    bonusSet: {
+        set: [SUITS[0]],
+        currency: "coin",
+        winValue: 25
+    }
 };
 
 const currentGameReducer = (state = initialState, action) => {
     // console.log(action)
     switch (action.type) {
+        case "currentGame/statusCharacter":
+            return {
+                ...state,
+                statusCharacter: action.payload
+            };
+        case "currentGame/openCard":
+            return {
+                ...state,
+                open: action.payload
+            };
         case "currentGame/pending":
             return {
                 ...state,

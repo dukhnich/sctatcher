@@ -30,7 +30,7 @@ function Background({status, scale, dispatch, heightScreen, ...props}) {
         y={(props.app.renderer.screen.height - height*scale)/2}
     >
         {props.children}
-        {/*{("idle" === status || "finish" === status) ?
+        {("idle" === status || "finish" === status) ?
             <Sprite
                 texture={PIXI.Texture.WHITE}
                 width ={width}
@@ -39,7 +39,7 @@ function Background({status, scale, dispatch, heightScreen, ...props}) {
                 alpha={0.6}
             />
             : null
-        }*/}
+        }
     </Sprite>
     )
 }

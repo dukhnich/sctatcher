@@ -1,40 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as PIXI from "pixi.js";
-import {CustomPIXIComponent} from "react-pixi-fiber";
 import Background from "./PlayingBoard/Background";
 import { connect } from "react-redux";
 import BoardHeader from "./PlayingBoard/BoardHeader";
 import StartBanner from "./StartBanner/StartBanner";
-import Bonus from "./PlayingBoard/Bonus";
+import Bonus from "./PlayingBoard/Bonus/Bonus";
 import Character from "./PlayingBoard/Character";
+import {Mask, drawRectangle} from "./Mask";
+import {SpineAnimation} from "./Spine";
 
 
 function Game({status, scale, width, height, dispatch, ...props}) {
-
-    const drawRectangle = (x, y, width, height) => {
-        const g = new PIXI.Graphics();
-        g.clear();
-        g.beginFill();
-        g.drawRect(x, y, width, height);
-        g.endFill();
-        return g;
-    };
-
-// simplified version, does not handle updates
-    const Mask = CustomPIXIComponent(
-        {
-            customDisplayObject: ({ draw }) => {
-                const container = new PIXI.Container();
-                container.mask = draw();
-                return container;
-            },
-            customApplyProps: (instance, oldProps, { draw }) => {
-                instance.mask = draw();
-            }
-        },
-        "Mask"
-    );
 
     return (
         <Mask draw={() => drawRectangle(
@@ -44,8 +20,9 @@ function Game({status, scale, width, height, dispatch, ...props}) {
             height
         )}>
             <Background {...props}>
-                <Bonus/>
+                <Bonus {...props}/>
                 <Character {...props}/>
+                {/*<SpineAnimation spine = {props.app.stage.getChildByName('spineCharacter')}/>*/}
                 <BoardHeader/>
             </Background>
             {("idle" === status || "finish" === status )?
