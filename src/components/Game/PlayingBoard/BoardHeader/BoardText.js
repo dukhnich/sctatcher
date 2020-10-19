@@ -1,7 +1,7 @@
 import React from "react";
 import {Sprite, Text, Container} from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
-import {getPngName} from "../../consts";
+import {getPngName} from "../../../../consts";
 import {connect} from "react-redux";
 
 

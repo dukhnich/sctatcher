@@ -57,7 +57,11 @@ function ScratchBig({width, height,card, container, scale, status, dispatch, ...
             height={texture.baseTexture.height}
 
         >
-            <CardSymbol container={texture.baseTexture}/>
+            <CardSymbol
+                x={texture.baseTexture.width/2}
+                y = {texture.baseTexture.height/2}
+                card={card}
+            />
             {open ? null : (
                 <Mask draw={()=>brush}>
                     <Sprite

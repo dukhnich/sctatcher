@@ -1,7 +1,7 @@
 import React from "react";
-import {Container, Sprite} from "react-pixi-fiber";
+import {Sprite} from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
-import {getPngName} from "../../consts";
+import {getPngName} from "../../../../consts";
 import BoardText from "./BoardText";
 import {connect} from "react-redux";
 
@@ -26,7 +26,7 @@ function BoardHeader({status, ...props}) {
                 pivot = {[current.width / 2, current.height/2]}
                 {...props}
             >
-                {"play" === status ?
+                {"play" === status || "finish" === status ?
                     (<BoardText
                         x = {current.width*0.035}
                         y = {current.height /2}

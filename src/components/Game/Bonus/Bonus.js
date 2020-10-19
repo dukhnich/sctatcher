@@ -3,7 +3,7 @@ import {Sprite} from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 import {connect} from "react-redux";
 import {getPngName} from "../../../consts";
-import ScratchBig from "./ScratchFrame";
+import ScratchBig from "./ScratchFrameBig";
 
 const bonus = getPngName("winner_frame");
 const texture = PIXI.Texture.from(bonus)

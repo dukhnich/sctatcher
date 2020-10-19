@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Background from "./PlayingBoard/Background";
+import Background from "./Game/Background";
 import { connect } from "react-redux";
-import BoardHeader from "./PlayingBoard/GameHeader";
+import BoardHeader from "./Game/GameHeader";
 import StartBanner from "./StartBanner/StartBanner";
-import Bonus from "./PlayingBoard/Bonus/Bonus";
-import Character from "./PlayingBoard/Character";
+import Bonus from "./Game/Bonus/Bonus";
+import Character from "./Game/Character";
 import {Mask, drawRectangle} from "./Mask";
 import {SpineAnimation} from "./Spine";
-import PlayingBoard from "./PlayingBoard/PlayingBoard";
-import GameHeader from "./PlayingBoard/GameHeader";
+import PlayingBoard from "./Game/PlayingBoard/PlayingBoard";
+import GameHeader from "./Game/GameHeader";
 
 
 function Game({status, scale, width, height, dispatch, ...props}) {
