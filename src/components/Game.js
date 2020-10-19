@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import Background from "./PlayingBoard/Background";
 import { connect } from "react-redux";
-import BoardHeader from "./PlayingBoard/BoardHeader";
+import BoardHeader from "./PlayingBoard/GameHeader";
 import StartBanner from "./StartBanner/StartBanner";
 import Bonus from "./PlayingBoard/Bonus/Bonus";
 import Character from "./PlayingBoard/Character";
 import {Mask, drawRectangle} from "./Mask";
 import {SpineAnimation} from "./Spine";
+import PlayingBoard from "./PlayingBoard/PlayingBoard";
+import GameHeader from "./PlayingBoard/GameHeader";
 
 
 function Game({status, scale, width, height, dispatch, ...props}) {
@@ -20,10 +22,10 @@ function Game({status, scale, width, height, dispatch, ...props}) {
             height
         )}>
             <Background {...props}>
-                <Bonus {...props}/>
+                <Bonus/>
                 <Character {...props}/>
-                {/*<SpineAnimation spine = {props.app.stage.getChildByName('spineCharacter')}/>*/}
-                <BoardHeader/>
+                <GameHeader/>
+                <PlayingBoard/>
             </Background>
             {("idle" === status || "finish" === status )?
                 <StartBanner {...props}/>

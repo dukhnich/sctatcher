@@ -26,10 +26,7 @@ function Bonus({width, height,card, status, ...props}) {
         y={(height*0.075)}
         texture={texture}
     >
-        {"play" === status ?
-            (<ScratchBig container={container} {...props}/>)
-            :null
-        }
+        <ScratchBig container={container} {...props}/>
     </Sprite>
     )
 }

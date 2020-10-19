@@ -4,7 +4,7 @@ import * as PIXI from "pixi.js";
 import {connect} from "react-redux";
 import {getPngName} from "../../consts";
 
-function CardSymbol({scale,card, container, ...props}) {
+function CardSymbol({card, container, ...props}) {
     const texture = PIXI.Texture.from(getPngName(card))
 
     const [current, setCurrent] = React.useState({
@@ -35,7 +35,6 @@ function CardSymbol({scale,card, container, ...props}) {
 
 const mapStateToProps = (state /*, ownProps*/) => {
     return {
-        scale: state.sizes.scale,
         card: state.currentGame.bonusSet.set[0],
 
     };

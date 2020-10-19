@@ -11,7 +11,7 @@ const frame = getPngName("scratch_frame_big");
 const texture = PIXI.Texture.from(frame)
 
 
-function ScratchBig({width, height,card, container, scale, dispatch, ...props}) {
+function ScratchBig({width, height,card, container, scale, status, dispatch, ...props}) {
     const [dragging, setDragging] = React.useState(false)
     const [open, setOpen] = React.useState(false)
 
@@ -63,9 +63,9 @@ function ScratchBig({width, height,card, container, scale, dispatch, ...props}) 
                     <Sprite
                     interactive
                     dragging ={dragging}
-                    pointerup={pointerUp}
-                    pointerdown={pointerDown}
-                    pointermove={pointerMove}
+                    pointerup={"play" === status ? pointerUp : () => {}}
+                    pointerdown={"play" === status ? pointerDown : () => {}}
+                    pointermove={"play" === status ? pointerMove : () => {}}
                     // x={(container.width - texture.baseTexture.width*1.075)/2 }
                     // y={(container.height - texture.baseTexture.height*0.465)/2}
                     texture={texture}
@@ -82,6 +82,8 @@ const mapStateToProps = (state /*, ownProps*/) => {
         height: state.sizes.heightBg,
         scale: state.sizes.scale,
         card: state.currentGame.bonusSet.set[0],
+        status: state.currentGame.status,
+
 
     };
 };
