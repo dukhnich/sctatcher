@@ -21,12 +21,13 @@ function Set({set, ...props}) {
 
     return (
         <Container
-            pivot = {[current.width/2, 0]}
+            pivot = {[current.width/2, current.height]}
             ref = {wrapper}
             {...props}
         >
             {set.map((card, index) => (
                 <ScratchFrame
+                    key = {index}
                     card={card}
                     number={index}
                 />

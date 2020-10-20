@@ -7,9 +7,10 @@ import StartBanner from "./StartBanner/StartBanner";
 import Bonus from "./Game/Bonus/Bonus";
 import Character from "./Game/Character";
 import {Mask, drawRectangle} from "./Mask";
-import {SpineAnimation} from "./Spine";
 import PlayingBoard from "./Game/PlayingBoard/PlayingBoard";
 import GameHeader from "./Game/GameHeader";
+import WinBanner from "./WinBanner/WinBanner";
+import {Sprite} from "react-pixi-fiber";
 
 
 function Game({status, scale, width, height, dispatch, ...props}) {
@@ -27,6 +28,10 @@ function Game({status, scale, width, height, dispatch, ...props}) {
                 <GameHeader/>
                 <PlayingBoard/>
             </Background>
+            {("finish" === status )?
+                <WinBanner {...props}/>
+                : null
+            }
             {("idle" === status || "finish" === status )?
                 <StartBanner {...props}/>
                 : null

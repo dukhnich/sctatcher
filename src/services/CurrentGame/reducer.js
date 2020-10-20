@@ -13,14 +13,14 @@ const initialState = {
         set: [SUITS[0]],
         currency: "coin",
         win: {
-            coin: 25,
-            dollar: 0
+            coin: 0,
+            dollar: 1
         }
     },
     mainSet: {
         set: [SUITS[0],SUITS[2],SUITS[3],SUITS[4],SUITS[1],SUITS[2]],
         win: {
-            coin: 0
+            coin: 10
         }
     }
 };
