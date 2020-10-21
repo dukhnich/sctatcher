@@ -70,13 +70,13 @@ function SetValues({bonusWin, setWin, w, ...props}) {
             ref = {wrapper}
             {...props}
         >
-            {wins.dollar ?
                 <Text
                     ref = {currency1}
                     pivot={[(dollar.width)/2, 0]}
                     style={ style}
                     text={wins.dollar}
                     x = {0}
+                    visible = {wins.dollar>0}
                 >
                     <CurrencySymbol
                         x={dollar.width}
@@ -84,15 +84,15 @@ function SetValues({bonusWin, setWin, w, ...props}) {
                         name={"dollar_icon"}
                     />
                 </Text>
-                : null
-            }
-            {wins.coin ?
+
                 <Text
                     ref = {currency2}
                     pivot={[(coin.width)/2, 0]}
                     style={ style}
                     text={wins.coin}
                     x = {dollar.width + (wins.dollar ? w*2.4 : 0)}
+                    visible = {wins.coin>0}
+
                 >
                     <CurrencySymbol
                         x={coin.width}
@@ -100,8 +100,7 @@ function SetValues({bonusWin, setWin, w, ...props}) {
                         name={"coin_icon_big"}
                     />
                 </Text>
-                : null
-            }
+
         </Container>
     );
 }

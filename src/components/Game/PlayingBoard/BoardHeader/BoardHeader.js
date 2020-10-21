@@ -26,14 +26,10 @@ function BoardHeader({status, ...props}) {
                 pivot = {[current.width / 2, current.height/2]}
                 {...props}
             >
-                {"play" === status || "finish" === status ?
-                    (<BoardText
-                        x = {current.width*0.035}
-                        y = {current.height /2}
-                    />)
-                    :null
-                }
-
+                <BoardText
+                    x = {current.width*0.035}
+                    y = {current.height /2}
+                />
             </Sprite>
 
     );

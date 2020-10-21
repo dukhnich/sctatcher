@@ -14,9 +14,11 @@ function PlayingBoard({width, height, ...props}) {
     const wrapper = React.useRef();
 
     React.useEffect(()=> {
-            setContainer(wrapper.current);
+            if (wrapper.current && wrapper.current.width && wrapper.current.width !== container.width) {
+                setContainer(wrapper.current);
+            }
         }
-        ,[wrapper])
+        ,[wrapper.current])
     return (
         <Container
             ref = {wrapper}

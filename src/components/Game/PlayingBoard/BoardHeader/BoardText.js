@@ -14,7 +14,7 @@ const style = new PIXI.TextStyle({
 });
 
 
-function BoardText({suit, ...props}) {
+function BoardText({suit, status, ...props}) {
     const texture = PIXI.Texture.from(getPngName(suit + "_small"))
 
     const [current, setCurrent] = React.useState({
@@ -53,6 +53,8 @@ function BoardText({suit, ...props}) {
         <Container
             pivot = {[0, current.height/2]}
             ref = {wrapper}
+            visible = {"play" === status || "finish" === status}
+
             {...props}
         >
             <Text
@@ -84,7 +86,7 @@ function BoardText({suit, ...props}) {
 const mapStateToProps = (state /*, ownProps*/) => {
     return {
         suit: state.currentGame.suit,
-
+        status: state.currentGame.status,
     };
 };
 export default connect(mapStateToProps)(BoardText);

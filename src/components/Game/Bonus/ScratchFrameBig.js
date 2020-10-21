@@ -54,31 +54,32 @@ function ScratchBig({width, height,card, open, container, scale, status, dispatc
         ,1000)
     }
     return (<Container
-            x={(container.width - texture.baseTexture.width*1.075)/2 }
-            y={(container.height - texture.baseTexture.height*0.465)/2}
-            width={texture.baseTexture.width}
-            height={texture.baseTexture.height}
-
+            // x={(container.width - texture.baseTexture.width*1.075)/2 }
+            // y={(container.height - texture.baseTexture.height*0.465)/2}
+            // width={texture.baseTexture.width}
+            // height={texture.baseTexture.height}
+            pivot={[texture.baseTexture.width*1.075/2, texture.baseTexture.height*0.465/2]}
+            {...props}
         >
             <CardSymbol
                 x={texture.baseTexture.width/2}
                 y = {texture.baseTexture.height/2}
                 card={card}
+                visible = {"play" === status || "finish" === status}
             />
-            {open ? null : (
-                <Mask draw={()=>brush}>
+                <Mask draw={()=>brush}
+                      visible = {!open}
+                >
                     <Sprite
                     interactive
                     dragging ={dragging}
                     pointerup={"play" === status ? pointerUp : () => {}}
                     pointerdown={"play" === status ? pointerDown : () => {}}
                     pointermove={"play" === status ? pointerMove : () => {}}
-                    // x={(container.width - texture.baseTexture.width*1.075)/2 }
-                    // y={(container.height - texture.baseTexture.height*0.465)/2}
                     texture={texture}
+                    visible = {!open}
                     />
                 </Mask>
-            )}
         </Container>
     )
 }

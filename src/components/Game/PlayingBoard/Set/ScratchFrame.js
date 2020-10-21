@@ -29,10 +29,19 @@ function ScratchFrame({width, height, open, card, number, suit, scale, status, d
         height: 0
     });
     const wrapper = React.useRef()
+
+    const [bg, setBg] = React.useState({
+        width: 0,
+        height: 0
+    });
+    const frame = React.useRef()
     React.useEffect(()=> {
-            setCurrent(wrapper.current);
+            if (wrapper.current && wrapper.current.width && wrapper.current.width !== current.width) {
+                setCurrent(wrapper.current);
+            }
+            setBg(frame.current)
         }
-        ,[])
+        ,[wrapper.current, frame.current])
 
     function pointerMove(event) {
         if (dragging) {
@@ -68,42 +77,41 @@ function ScratchFrame({width, height, open, card, number, suit, scale, status, d
             ,1000)
     }
     return (<Container
-            pivot = {[texture.baseTexture.width/2, texture.baseTexture.height]}
-            x = {texture.baseTexture.width*0.75 + (number%3)*(texture.baseTexture.width + texture.baseTexture.width*0.2)}
-            y = {-texture.baseTexture.height*0.75 + (Math.floor(number/3))*(texture.baseTexture.height + texture.baseTexture.height*0.2)}
-
-            {...props}
-            width={texture.baseTexture.width}
-            height={texture.baseTexture.height}
+            ref={wrapper}
+            pivot = {[texture.baseTexture.width/2, texture.baseTexture.height*0.65]}
+            x = {(number%3 -1)*(texture.baseTexture.width*1.2)}
+            y = {(Math.floor(number/3))*(texture.baseTexture.height*1.2)}
 
         >
         <Sprite
-            ref = {wrapper}
-            pivot={[current.width/2, current.height/2]}
+            ref = {frame}
+            pivot={[bg.width/2, bg.height/2]}
             texture={textureBg}
-            x={texture.baseTexture.width/2}
-            y = {texture.baseTexture.height/2}
+            x={current.width/2}
+            y = {current.height/2}
         >
-            <CardSymbol
-                x={current.width/2}
-                y = {current.height/2}
-                card={card}
-            />
+                <CardSymbol
+                    x={bg.width / 2}
+                    y={bg.height / 2}
+                    card={card}
+                    visible = {status !== "idle"}
+                />
         </Sprite>
-            {/*{open[number] ? null : (*/}
-            {/*    <Mask draw={()=>brush}>*/}
-            {/*        <Sprite*/}
-            {/*            interactive*/}
-            {/*            dragging ={dragging}*/}
-            {/*            pointerup={"play" === status ? pointerUp : () => {}}*/}
-            {/*            pointerdown={"play" === status ? pointerDown : () => {}}*/}
-            {/*            pointermove={"play" === status ? pointerMove : () => {}}*/}
-            {/*            // x={(container.width - texture.baseTexture.width*1.075)/2 }*/}
-            {/*            // y={(container.height - texture.baseTexture.height*0.465)/2}*/}
-            {/*            texture={texture}*/}
-            {/*        />*/}
-            {/*    </Mask>*/}
-            {/*)}*/}
+                <Mask draw={()=>brush}
+                      visible={!open[number]}
+                >
+                    <Sprite
+                        interactive
+                        dragging ={dragging}
+                        pointerup={"play" === status ? pointerUp : () => {}}
+                        pointerdown={"play" === status ? pointerDown : () => {}}
+                        pointermove={"play" === status ? pointerMove : () => {}}
+                        // x={(container.width - texture.baseTexture.width*1.075)/2 }
+                        // y={(container.height - texture.baseTexture.height*0.465)/2}
+                        texture={texture}
+                        visible={!open[number]}
+                    />
+                </Mask>
         </Container>
     )
 }

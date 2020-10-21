@@ -1,5 +1,5 @@
 import React from "react";
-import {Sprite} from "react-pixi-fiber";
+import {Container, Sprite} from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 import {connect} from "react-redux";
 import {getPngName} from "../../../consts";
@@ -26,7 +26,10 @@ function Bonus({width, height,card, status, ...props}) {
         y={(height*0.075)}
         texture={texture}
     >
-        <ScratchBig container={container} {...props}/>
+        <ScratchBig
+            x={(container.width)/2 }
+            y={(container.height)/2}
+        />
     </Sprite>
     )
 }

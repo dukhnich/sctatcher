@@ -26,14 +26,8 @@ function Game({status, scale, width, height, dispatch, ...props}) {
                 <GameHeader/>
                 <PlayingBoard/>
             </Background>
-            {("finish" === status )?
-                <WinBanner {...props}/>
-                : null
-            }
-            {("idle" === status || "finish" === status )?
-                <StartBanner {...props}/>
-                : null
-            }
+            <WinBanner {...props}/>
+            <StartBanner {...props}/>
         </Mask>
 
     );

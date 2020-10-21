@@ -15,13 +15,16 @@ function Set({set, ...props}) {
 
 
     React.useEffect(()=> {
-            setCurrent(wrapper.current);
+        console.log(wrapper.current.width)
+            if (wrapper.current && wrapper.current.width && wrapper.current.width !== current.width) {
+                setCurrent(wrapper.current);
+            }
         }
-        ,[wrapper])
+        ,[wrapper.current])
 
     return (
         <Container
-            pivot = {[current.width/2, 0]}
+            pivot = {[0, current.height/2]}
             ref = {wrapper}
             {...props}
         >
