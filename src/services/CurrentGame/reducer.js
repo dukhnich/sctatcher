@@ -1,7 +1,6 @@
 import {SUITS} from "../../consts";
 
 const initialState = {
-    currentGame: {},
     statusCharacter: "idle",
     status: "idle",
     suit: SUITS[0],
@@ -11,16 +10,15 @@ const initialState = {
     },
     bonusSet: {
         set: [SUITS[0]],
-        currency: "coin",
         win: {
-            coin: 0,
-            dollar: 1
+            coin: 25,
+            dollar: 0
         }
     },
     mainSet: {
         set: [SUITS[0],SUITS[2],SUITS[3],SUITS[4],SUITS[1],SUITS[2]],
         win: {
-            coin: 10
+            coin: 0
         }
     }
 };
@@ -43,12 +41,11 @@ const currentGameReducer = (state = initialState, action) => {
                 status: "pending"
             };
         case "currentGame/start":
-            console.log(initialState.open)
             return {
                 ...state,
                 open: initialState.open,
-                currentUser: action.payload,
-                status: "play"
+                status: "play",
+                ...action.payload
             };
         case "currentGame/finish":
             return {

@@ -1,18 +1,10 @@
 import React from "react";
-import {Sprite, Text, Container} from "react-pixi-fiber";
+import {Sprite} from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 import ButtonText from "./ButtonText";
 import {connect} from "react-redux";
 import {startGame} from "../../services/CurrentGame";
 
-
-const fontSize = 72;
-const style = new PIXI.TextStyle({
-    align: "center",
-    fill: "#ffffff",
-    fontFamily: "DRAguSans-Black",
-    fontSize: fontSize
-});
 const button = "/assets/magic_forest_button.png";
 const texture = PIXI.Texture.from(button)
 

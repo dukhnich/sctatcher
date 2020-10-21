@@ -16,27 +16,27 @@ const OPTIONS = {
   width: width
 };
 
-const Main = ({app, ...props}) => {
-    const [pending, setPending] = React.useState(true);
-
-    React.useEffect(()=> {
-        app.loader
-            .add('spineCharacter', '/assets/char_spine_v5/Red.json')
-        setTimeout(()=> {
-                setPending(false)
-            }
-            ,3000)
-    },[])
-
-    return pending ?
-        (
-
-            <SpineCharacter app={app} {...props}/>
-        ): (
-            <Game app={app} {...props}/>
-        )
-
-}
+// const Main = ({app, ...props}) => {
+//     const [pending, setPending] = React.useState(true);
+//
+//     React.useEffect(()=> {
+//         app.loader
+//             .add('spineCharacter', '/assets/char_spine_v5/Red.json')
+//         setTimeout(()=> {
+//                 setPending(false)
+//             }
+//             ,3000)
+//     },[])
+//
+//     return pending ?
+//         (
+//
+//             <SpineCharacter app={app} {...props}/>
+//         ): (
+//             <Game app={app} {...props}/>
+//         )
+//
+// }
 
 function App() {
     const [pending, setPending] = React.useState(true);

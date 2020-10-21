@@ -25,7 +25,7 @@ function CurrencySymbol({name, ...props}) {
             ref = {wrapper}
             {...props}
             texture={textureDollar}
-            pivot = {[-textureDollar.baseTexture.width*0.2, textureDollar.baseTexture.height/2]}
+            pivot = {[-current.width*0.2, current.height/2]}
         />
     );
 }

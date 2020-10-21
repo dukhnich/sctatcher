@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Background from "./Game/Background";
 import { connect } from "react-redux";
-import BoardHeader from "./Game/GameHeader";
 import StartBanner from "./StartBanner/StartBanner";
 import Bonus from "./Game/Bonus/Bonus";
 import Character from "./Game/Character";

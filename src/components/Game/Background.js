@@ -1,5 +1,5 @@
 import React from "react";
-import { Sprite, Container, CustomPIXIComponent } from "react-pixi-fiber";
+import { Sprite} from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 import {connect} from "react-redux";
 

@@ -90,20 +90,20 @@ function ScratchFrame({width, height, open, card, number, suit, scale, status, d
                 card={card}
             />
         </Sprite>
-            {open[number] ? null : (
-                <Mask draw={()=>brush}>
-                    <Sprite
-                        interactive
-                        dragging ={dragging}
-                        pointerup={"play" === status ? pointerUp : () => {}}
-                        pointerdown={"play" === status ? pointerDown : () => {}}
-                        pointermove={"play" === status ? pointerMove : () => {}}
-                        // x={(container.width - texture.baseTexture.width*1.075)/2 }
-                        // y={(container.height - texture.baseTexture.height*0.465)/2}
-                        texture={texture}
-                    />
-                </Mask>
-            )}
+            {/*{open[number] ? null : (*/}
+            {/*    <Mask draw={()=>brush}>*/}
+            {/*        <Sprite*/}
+            {/*            interactive*/}
+            {/*            dragging ={dragging}*/}
+            {/*            pointerup={"play" === status ? pointerUp : () => {}}*/}
+            {/*            pointerdown={"play" === status ? pointerDown : () => {}}*/}
+            {/*            pointermove={"play" === status ? pointerMove : () => {}}*/}
+            {/*            // x={(container.width - texture.baseTexture.width*1.075)/2 }*/}
+            {/*            // y={(container.height - texture.baseTexture.height*0.465)/2}*/}
+            {/*            texture={texture}*/}
+            {/*        />*/}
+            {/*    </Mask>*/}
+            {/*)}*/}
         </Container>
     )
 }

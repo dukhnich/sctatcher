@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Sprite, Text} from "react-pixi-fiber";
+import {Container, Text} from "react-pixi-fiber";
 import {connect} from "react-redux";
 import * as PIXI from "pixi.js";
 import CurrencySymbol from "./CurrencySymbol";
