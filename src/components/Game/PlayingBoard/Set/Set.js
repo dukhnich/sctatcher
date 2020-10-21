@@ -21,7 +21,7 @@ function Set({set, ...props}) {
 
     return (
         <Container
-            pivot = {[current.width/2, current.height]}
+            pivot = {[current.width/2, 0]}
             ref = {wrapper}
             {...props}
         >

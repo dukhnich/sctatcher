@@ -26,14 +26,13 @@ const initialState = {
 };
 
 const currentGameReducer = (state = initialState, action) => {
-    // console.log(action)
     switch (action.type) {
         case "currentGame/statusCharacter":
             return {
                 ...state,
                 statusCharacter: action.payload
             };
-        case "currentGame/openCard":
+        case "currentGame/changeCardsStatus":
             return {
                 ...state,
                 open: action.payload
@@ -44,8 +43,10 @@ const currentGameReducer = (state = initialState, action) => {
                 status: "pending"
             };
         case "currentGame/start":
+            console.log(initialState.open)
             return {
                 ...state,
+                open: initialState.open,
                 currentUser: action.payload,
                 status: "play"
             };

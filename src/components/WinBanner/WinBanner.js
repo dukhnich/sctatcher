@@ -8,10 +8,18 @@ import SetValues from "./SetValues";
 
 
 const banner = getPngName("frame1");
-const texture = PIXI.Texture.from(banner)
+const texture = PIXI.Texture.from(banner);
 
 function WinBanner({scale, app}) {
+    const t = PIXI.Texture.from(getPngName("dollar_icon"))
+    const [w, setW] = React.useState(0)
 
+    React.useEffect(()=> {
+            t.on('update', () => {
+                setW(t.baseTexture.width);
+            });
+        }
+        ,[])
     return (
         <Sprite
             scale = {scale}
@@ -24,10 +32,15 @@ function WinBanner({scale, app}) {
                 x={texture.baseTexture.width/2}
                 y={texture.baseTexture.height*0.1}
             />
-            <SetValues
-                x={(texture.baseTexture.width)/2}
-                y = {texture.baseTexture.height/2}
-            />
+            {w ?
+                <SetValues
+                    x={(texture.baseTexture.width)/2}
+                    y = {texture.baseTexture.height/2}
+                    tDollar = {t}
+                    w = {w}
+                />
+                :null
+            }
 
         </Sprite>
     );

@@ -5,16 +5,14 @@ import {connect} from "react-redux";
 import {getPngName} from "../../../consts";
 import CardSymbol from "../CardSymbol";
 import {drawBrush, drawRectangle, Mask} from "../../Mask";
-import {openCard} from "../../../services/CurrentGame";
+import {changeCardStatus} from "../../../services/CurrentGame";
 
 const frame = getPngName("scratch_frame_big");
 const texture = PIXI.Texture.from(frame)
 
 
-function ScratchBig({width, height,card, container, scale, status, dispatch, ...props}) {
+function ScratchBig({width, height,card, open, container, scale, status, dispatch, ...props}) {
     const [dragging, setDragging] = React.useState(false)
-    const [open, setOpen] = React.useState(false)
-
     const [brush, setBrush] = React.useState(
         drawRectangle(
             0,
@@ -42,11 +40,16 @@ function ScratchBig({width, height,card, container, scale, status, dispatch, ...
 
     function pointerUp(event) {
         setDragging(false);
-        setOpen(true);
         dispatch({type: "currentGame/statusCharacter", payload: "happy_bonus"});
+        dispatch(changeCardStatus("bonus", 0));
+        setBrush(drawRectangle(
+            0,
+            0,
+            width,
+            height
+        ));
         setTimeout(()=> {
                 dispatch({type: "currentGame/statusCharacter", payload: "idle"})
-                dispatch(openCard("bonus", 0))
             }
         ,1000)
     }
@@ -87,8 +90,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
         scale: state.sizes.scale,
         card: state.currentGame.bonusSet.set[0],
         status: state.currentGame.status,
-
-
+        open: state.currentGame.open.bonus[0]
     };
 };
 export default connect(mapStateToProps)(ScratchBig);

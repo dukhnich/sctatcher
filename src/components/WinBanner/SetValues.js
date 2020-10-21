@@ -2,7 +2,7 @@ import React from "react";
 import {Container, Sprite, Text} from "react-pixi-fiber";
 import {connect} from "react-redux";
 import * as PIXI from "pixi.js";
-import {getPngName} from "../../consts";
+import CurrencySymbol from "./CurrencySymbol";
 
 const fontSize = 126;
 const style = new PIXI.TextStyle({
@@ -11,10 +11,8 @@ const style = new PIXI.TextStyle({
     fontSize: fontSize
 });
 
-const textureDollar = PIXI.Texture.from(getPngName("dollar_icon"))
-const textureCoin = PIXI.Texture.from(getPngName("coin_icon_big"))
 
-function SetValues({bonusWin, setWin, ...props}) {
+function SetValues({bonusWin, setWin, w, ...props}) {
     const countWin = (wins) => {
         const finalWin = {};
         for (let win of wins) {
@@ -54,22 +52,17 @@ function SetValues({bonusWin, setWin, ...props}) {
     const currency2 = React.useRef();
 
     React.useEffect(()=> {
-        console.log(currency1.current)
-            setCurrent(wrapper.current);
+            if (wrapper.current) {
+                setCurrent(wrapper.current);
+            }
             if (currency1.current) {
                 setDollar(currency1.current);
             }
             if (currency2.current) {
                 setCoin(currency2.current);
             }
-            textureDollar.on('update', () => {
-                setDollar(currency1.current);
-            });
-            textureCoin.on('update', () => {
-                setCoin(currency2.current);
-            });
         }
-        ,[wrapper, currency1, currency2])
+        ,[wrapper.current, currency1.current, currency2.current])
 
     return (
         <Container
@@ -85,11 +78,10 @@ function SetValues({bonusWin, setWin, ...props}) {
                     text={wins.dollar}
                     x = {0}
                 >
-                    <Sprite
-                        pivot = {[-textureDollar.baseTexture.width*0.2, textureDollar.baseTexture.height/2]}
-                        texture={textureDollar}
-                        x = {dollar.width}
-                        y={dollar.height /2}
+                    <CurrencySymbol
+                        x={dollar.width}
+                        y={dollar.height / 2}
+                        name={"dollar_icon"}
                     />
                 </Text>
                 : null
@@ -100,13 +92,12 @@ function SetValues({bonusWin, setWin, ...props}) {
                     pivot={[(coin.width)/2, 0]}
                     style={ style}
                     text={wins.coin}
-                    x = {dollar.width + (wins.dollar ? textureDollar.baseTexture.width*2.4 : 0)}
+                    x = {dollar.width + (wins.dollar ? w*2.4 : 0)}
                 >
-                    <Sprite
-                        pivot = {[-textureCoin.baseTexture.width*0.2, textureCoin.baseTexture.height/2]}
-                        texture={textureCoin}
-                        x = {coin.width}
-                        y={coin.height /2}
+                    <CurrencySymbol
+                        x={coin.width}
+                        y={coin.height / 2}
+                        name={"coin_icon_big"}
                     />
                 </Text>
                 : null

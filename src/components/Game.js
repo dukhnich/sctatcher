@@ -10,7 +10,6 @@ import {Mask, drawRectangle} from "./Mask";
 import PlayingBoard from "./Game/PlayingBoard/PlayingBoard";
 import GameHeader from "./Game/GameHeader";
 import WinBanner from "./WinBanner/WinBanner";
-import {Sprite} from "react-pixi-fiber";
 
 
 function Game({status, scale, width, height, dispatch, ...props}) {

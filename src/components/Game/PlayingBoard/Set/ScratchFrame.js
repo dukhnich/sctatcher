@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {getPngName} from "../../../../consts";
 import CardSymbol from "../../CardSymbol";
 import {drawBrush, drawRectangle, Mask} from "../../../Mask";
-import {openCard} from "../../../../services/CurrentGame";
+import {changeCardStatus} from "../../../../services/CurrentGame";
 
 const scratch = getPngName("scratch_frame");
 const texture = PIXI.Texture.from(scratch)
@@ -13,9 +13,8 @@ const texture = PIXI.Texture.from(scratch)
 const frame = getPngName("frame");
 const textureBg = PIXI.Texture.from(frame)
 
-function ScratchFrame({width, height, card, number, suit, scale, status, dispatch, ...props}) {
+function ScratchFrame({width, height, open, card, number, suit, scale, status, dispatch, ...props}) {
     const [dragging, setDragging] = React.useState(false)
-    const [open, setOpen] = React.useState(false)
     const [brush, setBrush] = React.useState(
         drawRectangle(
             0,
@@ -52,15 +51,19 @@ function ScratchFrame({width, height, card, number, suit, scale, status, dispatc
 
     function pointerUp(event) {
         setDragging(false);
-        setOpen(true);
-
-            dispatch({
-                type: "currentGame/statusCharacter",
-                payload: card === suit ? "happy_card" : "disappointed"
-            });
+        dispatch({
+            type: "currentGame/statusCharacter",
+            payload: card === suit ? "happy_card" : "disappointed"
+        });
+        dispatch(changeCardStatus("set", number));
+        setBrush(drawRectangle(
+            0,
+            0,
+            width,
+            height
+        ));
         setTimeout(()=> {
                 dispatch({type: "currentGame/statusCharacter", payload: "idle"})
-                dispatch(openCard("set", number))
             }
             ,1000)
     }
@@ -87,7 +90,7 @@ function ScratchFrame({width, height, card, number, suit, scale, status, dispatc
                 card={card}
             />
         </Sprite>
-            {open ? null : (
+            {open[number] ? null : (
                 <Mask draw={()=>brush}>
                     <Sprite
                         interactive
@@ -112,6 +115,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
         scale: state.sizes.scale,
         suit: state.currentGame.suit,
         status: state.currentGame.status,
+        open: state.currentGame.open.set
     };
 };
 export default connect(mapStateToProps)(ScratchFrame);
