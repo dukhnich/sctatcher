@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as PIXI from "pixi.js";
 import {connect} from "react-redux";
-import {Container} from "react-pixi-fiber";
 import {SpineAnimation} from "./Spine";
 
 window.PIXI = PIXI;
@@ -13,22 +12,22 @@ function SpineCharacter({scale, dispatch, status, app}) {
 
     function loader(loader, res) {
         setSpineData(res.spineCharacter)
-        dispatch({type: "sizes/setStatus", payload: "download"});
     }
 
     React.useEffect(()=>{
-        if (status !== "download") {
+        if (status !== "download" && ! spineData) {
             app.loader
                 .add('spineCharacter', '/assets/char_spine_v5/Red.json')
                 .load(loader)
         }
-        else {
+        if (spineData && app.stage.getChildAt(0)) {
             app.stage.getChildAt(0).name = 'spineCharacter';
             app.stage.getChildAt(0).state.setAnimation(0, 'red_loading_screen_animation_loop', true);
+            dispatch({type: "sizes/setStatus", payload: "download"});
         }
-    },[status])
+    },[status, spineData, app.stage, app.loader])
 
-    return status === "download" ? (
+    return spineData ? (
         <SpineAnimation
             spine = {spineData}
             x ={app.screen.width / 2}
@@ -37,7 +36,7 @@ function SpineCharacter({scale, dispatch, status, app}) {
 
         />
     )
-        : <Container/>;
+        : null;
 }
 
 SpineCharacter.propTypes = {
