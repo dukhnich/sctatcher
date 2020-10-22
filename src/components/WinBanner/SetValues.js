@@ -74,7 +74,7 @@ function SetValues({bonusWin, setWin, w, ...props}) {
                     ref = {currency1}
                     pivot={[(dollar.width)/2, 0]}
                     style={ style}
-                    text={wins.dollar}
+                    text={wins.dollar || 0}
                     x = {0}
                     visible = {wins.dollar>0}
                 >
@@ -89,7 +89,7 @@ function SetValues({bonusWin, setWin, w, ...props}) {
                     ref = {currency2}
                     pivot={[(coin.width)/2, 0]}
                     style={ style}
-                    text={wins.coin}
+                    text={wins.coin || 0}
                     x = {dollar.width + (wins.dollar ? w*2.4 : 0)}
                     visible = {wins.coin>0}
 

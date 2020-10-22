@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {SpineAnimation} from "../Spine";
 
-function Character({app, widthBg, heightBg, statusCharacter}) {
+function Character({app, widthBg, heightBg, status, statusCharacter}) {
     const ref = React.useRef()
     React.useEffect(()=>{
         // console.log(ref.current);
@@ -11,7 +11,7 @@ function Character({app, widthBg, heightBg, statusCharacter}) {
         }
 
         ,[statusCharacter])
-    return (
+    return status === "download" ? (
         <SpineAnimation
             ref={ref}
             spine = {app.stage.getChildByName('spineCharacter')}
@@ -20,7 +20,7 @@ function Character({app, widthBg, heightBg, statusCharacter}) {
 
         />
 
-    );
+    ) : null;
 }
 
 Character.propTypes = {
@@ -32,6 +32,8 @@ const mapStateToProps = (state /*, ownProps*/) => {
         widthBg: state.sizes.widthBg,
         heightBg: state.sizes.heightBg,
         statusCharacter: state.currentGame.statusCharacter,
+        status: state.sizes.status,
+
     };
 };
 export default connect(mapStateToProps)(Character);

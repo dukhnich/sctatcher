@@ -15,7 +15,7 @@ function Set({set, ...props}) {
 
 
     React.useEffect(()=> {
-        console.log(wrapper.current.width)
+        // console.log(wrapper.current.width)
             if (wrapper.current && wrapper.current.width && wrapper.current.width !== current.width) {
                 setCurrent(wrapper.current);
             }

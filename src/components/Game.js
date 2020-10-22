@@ -11,9 +11,9 @@ import GameHeader from "./Game/GameHeader";
 import WinBanner from "./WinBanner/WinBanner";
 
 
-function Game({status, scale, width, height, dispatch, ...props}) {
+function Game({status, scale, width, height, spineStatus, ...props}) {
 
-    return (
+    return spineStatus === "download" ? (
         <Mask draw={() => drawRectangle(
             ((props.app.renderer.screen.width - width*scale)/2) + width*scale*0.11,
             0,
@@ -30,7 +30,7 @@ function Game({status, scale, width, height, dispatch, ...props}) {
             <StartBanner {...props}/>
         </Mask>
 
-    );
+    ) : null;
 }
 
 Game.propTypes = {
@@ -44,6 +44,8 @@ const mapStateToProps = (state /*, ownProps*/) => {
         scale: state.sizes.scale,
         width: state.sizes.widthBg,
         height: state.sizes.heightBg,
+        spineStatus: state.sizes.status,
+
     };
 };
 export default connect(mapStateToProps)(Game);

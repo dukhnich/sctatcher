@@ -2,41 +2,42 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as PIXI from "pixi.js";
 import {connect} from "react-redux";
+import {Container} from "react-pixi-fiber";
+import {SpineAnimation} from "./Spine";
 
 window.PIXI = PIXI;
 require("pixi-spine")
 
-function SpineCharacter({scale, app}) {
+function SpineCharacter({scale, dispatch, status, app}) {
+    const [spineData, setSpineData] = React.useState(null)
 
-    function onAssetsLoaded(loader, res) {
-        const spineCharacter = new window.PIXI.spine.Spine(res.spineCharacter.spineData);
-        // set the position
-        spineCharacter.name = 'spineCharacter';
-        spineCharacter.x = app.screen.width / 2;
-        spineCharacter.y = app.screen.height / 2;
-
-        spineCharacter.scale.set(scale);
-
-        app.stage.addChild(spineCharacter);
-
-        spineCharacter.state.setAnimation(0, 'red_loading_screen_animation_loop', true);
-        // console.log(spineCharacter.state)
-        app.start();
+    function loader(loader, res) {
+        setSpineData(res.spineCharacter)
+        dispatch({type: "sizes/setStatus", payload: "download"});
     }
 
     React.useEffect(()=>{
-        // console.log(app.stage.getChildAt(0))
-        app.loader
-            .add('spineCharacter', '/assets/char_spine_v5/Red.json')
-            .load(onAssetsLoaded);
-
-        return ()=> {
-            app.stage.getChildByName('spineCharacter').state.setEmptyAnimation(0);
+        if (status !== "download") {
+            app.loader
+                .add('spineCharacter', '/assets/char_spine_v5/Red.json')
+                .load(loader)
         }
+        else {
+            app.stage.getChildAt(0).name = 'spineCharacter';
+            app.stage.getChildAt(0).state.setAnimation(0, 'red_loading_screen_animation_loop', true);
+        }
+    },[status])
 
-    },[])
-    return (<></>
-    );
+    return status === "download" ? (
+        <SpineAnimation
+            spine = {spineData}
+            x ={app.screen.width / 2}
+            y = {app.screen.height / 2}
+            scale = {scale}
+
+        />
+    )
+        : <Container/>;
 }
 
 SpineCharacter.propTypes = {
@@ -46,6 +47,8 @@ SpineCharacter.propTypes = {
 const mapStateToProps = (state /*, ownProps*/) => {
     return {
         scale: state.sizes.scale,
+        status: state.sizes.status,
+
     };
 };
 export default connect(mapStateToProps)(SpineCharacter);

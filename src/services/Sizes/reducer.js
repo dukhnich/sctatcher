@@ -3,7 +3,8 @@ const initialState = {
     widthBg: 0,
     heightBg: 0,
     widthScreen: window.innerWidth,
-    heightScreen: window.innerHeight
+    heightScreen: window.innerHeight,
+    status: "idle"
 };
 
 const sizesReducer = (state = initialState, action) => {
@@ -12,6 +13,12 @@ const sizesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload
+            };
+        case "sizes/setStatus":
+            // console.log(action)
+            return {
+                ...state,
+                status: action.payload
             };
         default:
             return state;
